@@ -5,8 +5,11 @@ import ExpenseTotal from './components/ExpenseTotal';
 import ExpenseList from './components/ExpenseList';
 import AddExpenseForm from './components/AddExpenseForm';
 import { AppProvider } from './context/AppContext';
+import { useState } from 'react';
 
 const App = () => {
+	const [search, setSearch] = useState("");
+
 	return (
 		<AppProvider>
 			<div className='container'>
@@ -22,10 +25,11 @@ const App = () => {
 						<ExpenseTotal />
 					</div>
 				</div>
+				<input onChange={(e) => {setSearch(e.target.value)}} />
 				<h3 className='mt-3'>Expenses</h3>
 				<div className='row mt-3'>
 					<div className='col-sm'>
-						<ExpenseList />
+						<ExpenseList search={search} />
 					</div>
 				</div>
 				<h3 className='mt-3'>Add Expense</h3>
