@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import { v4 as uuidv4 } from 'uuid';
+import { addDoc, collection } from "@firebase/firestore";
+import { firestore } from "../firebase";
 
 const AddExpenseForm = () => {
 	const { dispatch } = useContext(AppContext);
@@ -11,11 +13,23 @@ const AddExpenseForm = () => {
 	const onSubmit = (event) => {
 		event.preventDefault();
 
+		const ref = collection(firestore, "budget_tracker");
+
 		const expense = {
 			id: uuidv4(),
 			name: name,
 			cost: parseInt(cost),
 		};
+
+		let data = {
+			notes: expense
+		}
+
+		try {
+			addDoc(ref, data);
+		} catch(e) {
+			console.log(e);
+		}
 
 		dispatch({
 			type: 'ADD_EXPENSE',

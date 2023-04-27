@@ -6,3 +6,4 @@ Further task -
 - [ ] host the app
 - [ ] add analytics
 - [ ] add debounced (after fetching paginated list from firebase)
+- [ ] Add geolocation
